@@ -7,6 +7,7 @@ import re
 import sqlite3
 import sys
 import time
+import urllib.request
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -318,7 +319,16 @@ def _process_result(
     pdf_file = pdf_dir / f"{arxiv_id}.pdf"
     if not skip_download and not pdf_file.exists():
         try:
-            result.download_pdf(dirpath=str(pdf_dir), filename=pdf_file.name)
+            pdf_url = getattr(result, "pdf_url", None) or f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+            req = urllib.request.Request(
+                pdf_url,
+                headers={"User-Agent": "ai-papers-agentic-rag/1.0"},
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = resp.read()
+            if not data.startswith(b"%PDF"):
+                raise ValueError(f"Response from {pdf_url} is not a valid PDF")
+            pdf_file.write_bytes(data)
             time.sleep(0.5)
         except (OSError, RuntimeError, ValueError) as exc:
             print(f"  [WARN] Failed to download {arxiv_id}: {exc}")
