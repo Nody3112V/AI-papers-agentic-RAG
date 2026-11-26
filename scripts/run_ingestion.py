@@ -26,7 +26,19 @@ def load_embedders(
     cache_dir: str,
     device: str = "cpu",
 ) -> tuple[TextEmbedding, SparseTextEmbedding]:
-    providers = ["CUDAExecutionProvider", "CPUExecutionProvider"] if device == "cuda" else None
+    providers: list[str] | None = None
+    if device == "cuda":
+        import onnxruntime as ort
+
+        available = ort.get_available_providers()
+        if "CUDAExecutionProvider" in available:
+            providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+        else:
+            print(
+                f"[WARN] CUDAExecutionProvider unavailable (available={available}); "
+                "falling back to CPUExecutionProvider for FastEmbed."
+            )
+            providers = ["CPUExecutionProvider"]
     dense = TextEmbedding(model_name=dense_model, cache_dir=cache_dir, providers=providers)
     sparse = SparseTextEmbedding(model_name=sparse_model, cache_dir=cache_dir)
     return dense, sparse
