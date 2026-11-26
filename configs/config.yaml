@@ -1,0 +1,62 @@
+app:
+  name: "ai-papers-agentic-rag"
+  runtime_env: "laptop"               # "laptop" (ONNX CPU, 0 VRAM) | "kaggle" (CUDA GPU)
+  max_query_chars: 2000
+  conversation_window_turns: 6
+
+ingestion:                            # Thực thi trên Kaggle Notebook 1
+  parser: "docling"                   # "docling" | "pymupdf4llm"
+  docling_do_ocr: false
+  docling_do_table_structure: true
+  exclude_sections: ["references", "bibliography", "acknowledgments", "ethics statement"]
+  chunk_size_tokens: 512
+  chunk_overlap_tokens: 64
+  max_table_chunk_tokens: 700
+  inject_contextual_header: true
+
+qdrant:
+  mode: "cloud"                       # "cloud" (Qdrant Cloud Free Tier) | "local_path" (0-Docker offline)
+  local_path: "data/qdrant_local"
+  collection_name: "ai_papers_chunks"
+
+retrieval:
+  backend: "fastembed"                # ONNX Runtime siêu nhẹ — không cần PyTorch trên Laptop
+  cache_dir: "./.cache/fastembed"
+  dense_model: "BAAI/bge-small-en-v1.5"
+  sparse_model: "Qdrant/bm25"
+  # Laptop dùng bản ONNX nhẹ (~80-150 MB); Kaggle NB 2 đối chứng thêm BAAI/bge-reranker-base
+  reranker_model_laptop: "jinaai/jina-reranker-v1-turbo-en"
+  reranker_model_kaggle_heavy: "BAAI/bge-reranker-base"
+  dense_top_k: 20
+  sparse_top_k: 20
+  rrf_k: 60
+  rrf_candidates: 15
+  rerank_top_k: 5
+  min_rerank_score: 0.15
+
+mcp:
+  transport: "streamable-http"        # "stdio" (MCP Inspector) | "streamable-http" (Local/Cloud)
+  host: "127.0.0.1"
+  port: 8001
+  sql_max_limit: 50
+  sql_timeout_seconds: 2.0
+  client_timeout_seconds: 10.0
+
+agent:
+  max_rag_retries: 2
+  max_sql_retries: 1
+  max_gen_retries: 1
+  max_tool_calls: 3
+  enable_llm_hallucination_check: true
+  hitl_write_tools: ["create_reading_note"]
+
+llm:
+  primary_provider: "gemini"          # "gemini" | "groq" | "openai_compatible" (trên Kaggle NB 3)
+  fallback_order: ["gemini", "groq"]
+  temperature: 0.1
+  models:
+    gemini_fast: "gemini-2.5-flash"
+    gemini_main: "gemini-2.5-flash"
+    groq_fast: "llama-3.1-8b-instant"
+    groq_main: "llama-3.3-70b-versatile"
+    kaggle_openweight: "Qwen/Qwen2.5-7B-Instruct"
