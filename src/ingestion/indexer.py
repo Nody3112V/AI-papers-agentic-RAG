@@ -9,6 +9,7 @@ from typing import Any
 
 from qdrant_client import QdrantClient, models
 
+from src.core.config import get_settings
 from src.ingestion.chunker import PaperChunk
 
 
@@ -24,14 +25,15 @@ def get_qdrant_client(
     mode: str | None = None,
     local_path: str | None = None,
 ) -> QdrantClient:
-    effective_mode = mode or os.getenv("QDRANT_MODE", "cloud")
+    settings = get_settings()
+    effective_mode = mode or os.getenv("QDRANT_MODE") or settings.effective_qdrant_mode
     if effective_mode == "cloud":
-        return QdrantClient(
-            url=os.environ["QDRANT_URL"],
-            api_key=os.environ["QDRANT_API_KEY"],
-            timeout=30.0,
-        )
-    path = local_path or os.getenv("QDRANT_LOCAL_PATH", "data/qdrant_local")
+        url = os.getenv("QDRANT_URL") or settings.env.qdrant_url
+        api_key = os.getenv("QDRANT_API_KEY") or settings.env.qdrant_api_key
+        if not url or not api_key:
+            raise ValueError("QDRANT_URL and QDRANT_API_KEY must be set in .env or environment.")
+        return QdrantClient(url=url, api_key=api_key, timeout=30.0)
+    path = local_path or os.getenv("QDRANT_LOCAL_PATH") or settings.env.qdrant_local_path
     return QdrantClient(path=path)
 
 

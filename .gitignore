@@ -13,6 +13,8 @@ htmlcov/
 !.env.example
 
 # Local data, DB, Cache & Logs
+data/raw_papers/
+data/processed/markdown/
 data/sqlite/*.db
 data/sqlite/*.db-shm
 data/sqlite/*.db-wal
