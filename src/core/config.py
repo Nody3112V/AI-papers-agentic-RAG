@@ -80,9 +80,9 @@ class AgentConfig(BaseModel):
 
 
 class LLMModelsConfig(BaseModel):
-    gemini_fast: str = "gemini-2.5-flash"
-    gemini_main: str = "gemini-2.5-flash"
-    groq_fast: str = "llama-3.1-8b-instant"
+    gemini_fast: str = "gemini-3.8-flash"
+    gemini_main: str = "gemini-3.8-flash"
+    groq_fast: str = "llama-3.3-70b-versatile"
     groq_main: str = "llama-3.3-70b-versatile"
     kaggle_openweight: str = "Qwen/Qwen2.5-7B-Instruct"
 

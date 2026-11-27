@@ -55,8 +55,8 @@ llm:
   fallback_order: ["gemini", "groq"]
   temperature: 0.1
   models:
-    gemini_fast: "gemini-2.5-flash"
-    gemini_main: "gemini-2.5-flash"
-    groq_fast: "llama-3.1-8b-instant"
+    gemini_fast: "gemini-3.8-flash"
+    gemini_main: "gemini-3.8-flash"
+    groq_fast: "llama-3.3-70b-versatile"
     groq_main: "llama-3.3-70b-versatile"
     kaggle_openweight: "Qwen/Qwen2.5-7B-Instruct"
