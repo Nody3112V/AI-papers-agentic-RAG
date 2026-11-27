@@ -1,0 +1,769 @@
+[
+  {
+    "id": "q_fact_01",
+    "category": "factual_rag",
+    "question": "What are the four types of reflection tokens used in Self-RAG and what does the Retrieve token decide?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2310.11511"],
+    "evidence_quotes": [
+      "Four types of reflection tokens used in SELF-RAG",
+      "Decides when to retrieve with R"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Self-RAG uses four types of reflection tokens: Retrieve, ISREL, ISSUP, and ISUSE. The Retrieve token outputs {yes, no, continue} and decides when to retrieve passages using the retriever R."
+  },
+  {
+    "id": "q_fact_02",
+    "category": "factual_rag",
+    "question": "How is the critic model initialized in Self-RAG and what agreement rate does it achieve with GPT-4 predictions?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2310.11511"],
+    "evidence_quotes": [
+      "The critic achieves a higher than 90% agreement with GPT-4-based predictions on most reflection token categories"
+    ],
+    "should_refuse": false,
+    "reference_answer": "The Self-RAG critic model C is initialized with Llama 2-7B (the same pre-trained LM as the generator) and achieves higher than 90% agreement with GPT-4-based predictions on most reflection token categories."
+  },
+  {
+    "id": "q_fact_03",
+    "category": "factual_rag",
+    "question": "What three confidence actions can CRAG's lightweight retrieval evaluator trigger, and what model initializes the evaluator?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2401.15884"],
+    "evidence_quotes": [
+      "A confidence degree is quantified based on which different knowledge retrieval actions of {Correct, Incorrect, Ambiguous} can be triggered",
+      "T5-large (Raffel et al., 2020) is adopted for initializing the retrieval evaluator and fine-tuned"
+    ],
+    "should_refuse": false,
+    "reference_answer": "CRAG's retrieval evaluator triggers three actions: Correct, Incorrect, and Ambiguous. The evaluator is initialized from T5-large (0.77B parameters) and fine-tuned to score question-document relevance."
+  },
+  {
+    "id": "q_fact_04",
+    "category": "factual_rag",
+    "question": "How does CRAG's decompose-then-recompose knowledge refinement algorithm process retrieved documents?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2401.15884"],
+    "evidence_quotes": [
+      "Given a retrieved relevant document, a decomposethen-recompose knowledge refinement method is designed to further extract the most critical knowledge strips in it"
+    ],
+    "should_refuse": false,
+    "reference_answer": "CRAG segments retrieved documents into fine-grained knowledge strips (a few sentences each), scores each strip using the fine-tuned retrieval evaluator, filters out irrelevant strips, and recomposes the relevant strips via concatenation."
+  },
+  {
+    "id": "q_fact_05",
+    "category": "factual_rag",
+    "question": "How does RAG-Fusion combine multiple generated queries with Reciprocal Rank Fusion (RRF)?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2402.03367"],
+    "evidence_quotes": [
+      "RAG-Fusion combines RAG and reciprocal rank fusion (RRF) by generating multiple queries, reranking them with reciprocal scores and fusing the documents and scores"
+    ],
+    "should_refuse": false,
+    "reference_answer": "RAG-Fusion prompts an LLM to generate multiple search queries from the original query, runs vector search for each, accumulates RRF scores across all ranked lists, and passes the fused reranked documents along with the queries to the LLM."
+  },
+  {
+    "id": "q_fact_06",
+    "category": "factual_rag",
+    "question": "What two stages does GraphRAG use to build its graph index and how does it answer global queries?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2404.16130"],
+    "evidence_quotes": [
+      "Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pregenerate community summaries",
+      "GraphRAG answers queries through map-reduce processing of community summaries"
+    ],
+    "should_refuse": false,
+    "reference_answer": "GraphRAG builds its index in two stages: extracting an entity knowledge graph from source documents and pregenerating hierarchical community summaries (via Leiden clustering). At query time, it uses map-reduce over community summaries to produce partial answers and combine them into a global answer."
+  },
+  {
+    "id": "q_fact_07",
+    "category": "factual_rag",
+    "question": "What three Wikipedia web API actions are defined in ReAct for knowledge-intensive reasoning tasks?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2210.03629"],
+    "evidence_quotes": [
+      "We design a simple Wikipedia web API with three types of actions to support interactive information retrieval: (1) search[entity]"
+    ],
+    "should_refuse": false,
+    "reference_answer": "ReAct defines three Wikipedia API actions: search[entity] (returns the first 5 sentences or top-5 similar entities), lookup[string] (returns the next sentence containing the string), and finish[answer]."
+  },
+  {
+    "id": "q_fact_08",
+    "category": "factual_rag",
+    "question": "In ReAct Table 1, what HotpotQA EM and Fever accuracy scores does PaLM-540B achieve with ReAct versus CoT-SC -> ReAct?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2210.03629"],
+    "evidence_quotes": [
+      "Table 1: PaLM-540B prompting results on HotpotQA and Fever",
+      "CoT-SC → ReAct"
+    ],
+    "should_refuse": false,
+    "reference_answer": "In ReAct Table 1, PaLM-540B with ReAct achieves 27.4 EM on HotpotQA and 60.9 accuracy on Fever, while CoT-SC -> ReAct improves to 34.2 EM on HotpotQA and 64.6 accuracy on Fever."
+  },
+  {
+    "id": "q_fact_09",
+    "category": "factual_rag",
+    "question": "How does Toolformer filter candidate API calls in a self-supervised manner without human annotations?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2302.04761"],
+    "evidence_quotes": [
+      "We then execute these API calls and filter out all calls which do not reduce the loss Li over the next tokens"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Toolformer samples candidate API calls via in-context learning, executes them, and retains only the calls whose returned responses reduce the language modeling loss over predicting future tokens."
+  },
+  {
+    "id": "q_fact_10",
+    "category": "factual_rag",
+    "question": "What HumanEval pass@1 accuracy does Reflexion achieve and how does it reinforce language agents without updating weights?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2303.11366"],
+    "evidence_quotes": [
+      "Reflexion achieves a 91% pass@1 accuracy on the HumanEval coding benchmark, surpassing the previous state-of-the-art GPT-4 that achieves 80%",
+      "Reflexion agents verbally reflect on task feedback signals, then maintain their own reflective text in an episodic memory buffer"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Reflexion achieves 91% pass@1 on HumanEval (surpassing GPT-4's 80%). Instead of updating weights, agents verbally reflect on environment feedback and store reflective summaries in an episodic memory buffer to guide subsequent trials."
+  },
+  {
+    "id": "q_fact_11",
+    "category": "factual_rag",
+    "question": "What three contiguous sections make up MemGPT's main context (prompt tokens)?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2310.08560"],
+    "evidence_quotes": [
+      "The prompt tokens in MemGPT are split into three contiguous sections: the system instructions, working context, and FIFO Queue"
+    ],
+    "should_refuse": false,
+    "reference_answer": "MemGPT's main context consists of three contiguous sections: read-only system instructions, a fixed-size read/write working context, and a FIFO queue storing rolling messages and an evicted-message summary."
+  },
+  {
+    "id": "q_fact_12",
+    "category": "factual_rag",
+    "question": "What are the two core concepts introduced by the AutoGen framework?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2308.08155"],
+    "evidence_quotes": [
+      "This section introduces the two key concepts of AutoGen: conversable agents and conversation programming"
+    ],
+    "should_refuse": false,
+    "reference_answer": "AutoGen introduces two core concepts: customizable, conversable agents (backed by LLMs, tools, humans, or combinations) and conversation programming for defining multi-agent interaction workflows."
+  },
+  {
+    "id": "q_fact_13",
+    "category": "factual_rag",
+    "question": "What three memory-saving innovations does QLoRA introduce and how much memory does Double Quantization save per parameter?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.14314"],
+    "evidence_quotes": [
+      "QLORA introduces multiple innovations designed to reduce memory use without sacrificing performance: (1) 4-bit NormalFloat",
+      "reduces the memory footprint per parameter from 32/64 = 0.5 bits, to 8/64 + 32/(64 · 256) = 0.127 bits, a reduction of 0.373 bits per parameter"
+    ],
+    "should_refuse": false,
+    "reference_answer": "QLoRA introduces 4-bit NormalFloat (NF4), Double Quantization (DQ), and Paged Optimizers. Double Quantization reduces quantization constant overhead from 0.5 bits to 0.127 bits per parameter, saving 0.373 bits per parameter."
+  },
+  {
+    "id": "q_fact_14",
+    "category": "factual_rag",
+    "question": "In QLoRA Table 1, what are the Elo ratings and sizes of Guanaco 65B and Guanaco 33B compared to ChatGPT?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.14314"],
+    "evidence_quotes": [
+      "Table 1: Elo ratings for a competition between models",
+      "| Guanaco 65B | 41 GB  | 1022 ± 1 |"
+    ],
+    "should_refuse": false,
+    "reference_answer": "In QLoRA Table 1, Guanaco 65B (41 GB) has an Elo rating of 1022 ± 1 and Guanaco 33B (21 GB) has 992 ± 1, both exceeding ChatGPT's 966 ± 1."
+  },
+  {
+    "id": "q_fact_15",
+    "category": "factual_rag",
+    "question": "How does Direct Preference Optimization (DPO) eliminate the need for an explicit reward model and reinforcement learning loop?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.18290"],
+    "evidence_quotes": [
+      "DPO uses a change of variables to define the preference loss as a function of the policy directly",
+      "optimize a policy using a simple binary cross entropy objective"
+    ],
+    "should_refuse": false,
+    "reference_answer": "DPO leverages a closed-form analytical mapping from reward functions to optimal policies (change of variables) under the Bradley-Terry preference model, optimizing the policy directly with a simple binary cross-entropy loss without fitting a separate reward model or running RL."
+  },
+  {
+    "id": "q_fact_16",
+    "category": "factual_rag",
+    "question": "How does DoRA decompose pre-trained weights and which component uses LoRA for adaptation?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2402.09353"],
+    "evidence_quotes": [
+      "DoRA decomposes the pre-trained weight into two components, magnitude and direction, for fine-tuning, specifically employing LoRA for directional updates"
+    ],
+    "should_refuse": false,
+    "reference_answer": "DoRA decomposes each pre-trained weight matrix into a magnitude vector and a directional matrix, fine-tuning both while applying LoRA specifically to the directional component to keep trainable parameters minimal with zero extra inference latency."
+  },
+  {
+    "id": "q_fact_17",
+    "category": "factual_rag",
+    "question": "How does AWQ identify the 1% salient weight channels and protect them without mixed-precision hardware overhead?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2306.00978"],
+    "evidence_quotes": [
+      "To identify salient weight channels, we should refer to the activation distribution, not weights",
+      "AWQ employs an equivalent transformation to scale the salient weight channels to protect them"
+    ],
+    "should_refuse": false,
+    "reference_answer": "AWQ identifies the 0.1%-1% salient weight channels by observing the activation distribution (larger activation magnitudes) rather than weight magnitudes, and applies per-channel scaling via an equivalent transformation to reduce quantization error without mixed-precision hardware."
+  },
+  {
+    "id": "q_fact_18",
+    "category": "factual_rag",
+    "question": "How does ORPO align language models without a reference model or separate SFT warm-up stage, and what MT-Bench score does Mistral-ORPO-beta achieve?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2403.07691"],
+    "evidence_quotes": [
+      "assigning a weak penalty to the rejected responses and a strong adaptation signal to the chosen responses with a simple log odds ratio term appended to the negative log-likelihood loss",
+      "achieving up to 12.20% on AlpacaEval2.0 (Figure 1), 66.19% on IFEval (instruction-level loose, Table 6), and 7.32 in MT-Bench"
+    ],
+    "should_refuse": false,
+    "reference_answer": "ORPO appends a log odds ratio preference penalty directly to the SFT negative log-likelihood loss, eliminating both the reference model and separate warm-up stage. Mistral-ORPO-beta (7B) achieves 7.32 on MT-Bench."
+  },
+  {
+    "id": "q_fact_19",
+    "category": "factual_rag",
+    "question": "What three reference-free quality aspects does the RAGAS framework evaluate?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2309.15217"],
+    "evidence_quotes": [
+      "First, Faithfulness refers to the idea that the answer should be grounded in the given context",
+      "Second, Answer Relevance refers to the idea that the generated answer should address the actual question"
+    ],
+    "should_refuse": false,
+    "reference_answer": "RAGAS evaluates three reference-free quality dimensions: Faithfulness (answer grounded in retrieved context), Answer Relevance (answer addresses the user question), and Context Relevance (retrieved context is focused with minimal noise)."
+  },
+  {
+    "id": "q_fact_20",
+    "category": "factual_rag",
+    "question": "What are the three main components of G-EVAL and what Spearman correlation with humans does it achieve with GPT-4 on summarization?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2303.16634"],
+    "evidence_quotes": [
+      "G-EVAL with GPT-4 as the backbone model achieves a Spearman correlation of 0.514 with human on summarization task",
+      "G-EVAL is a prompt-based evaluator with three main components: 1) a prompt that contains the definition of the evaluation task"
+    ],
+    "should_refuse": false,
+    "reference_answer": "G-EVAL consists of (1) a task definition and evaluation criteria prompt, (2) LLM-generated chain-of-thought evaluation steps, and (3) a probability-weighted scoring function. With GPT-4 it achieves a 0.514 Spearman correlation with humans on summarization."
+  },
+  {
+    "id": "q_multi_01",
+    "category": "multi_hop_rag",
+    "question": "Compare how Self-RAG and CRAG evaluate retrieved documents and handle irrelevant passages.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2310.11511", "2401.15884"],
+    "evidence_quotes": [
+      "SELF-RAG processes passages in parallel and filters out irrelevant ones through self-reflection",
+      "If the action Incorrect is triggered, the retrieved documents will be discarded. Instead, web searches are resorted to"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Self-RAG trains the generator LM itself to emit reflection tokens (ISREL, ISSUP, ISUSE) to filter passages and rank segments in parallel, whereas CRAG uses a lightweight external T5-large retrieval evaluator (0.77B) to classify retrieval as Correct, Incorrect, or Ambiguous, discarding irrelevant documents and falling back to web search."
+  },
+  {
+    "id": "q_multi_02",
+    "category": "multi_hop_rag",
+    "question": "Compare the core architectural differences between GraphRAG and RAG-Fusion in improving upon conventional vector RAG.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2404.16130", "2402.03367"],
+    "evidence_quotes": [
+      "GraphRAG first uses an LLM to construct a knowledge graph, where nodes correspond to key entities in the corpus",
+      "RAG-Fusion combines RAG and reciprocal rank fusion (RRF) by generating multiple queries, reranking them with reciprocal scores"
+    ],
+    "should_refuse": false,
+    "reference_answer": "GraphRAG builds an entity knowledge graph and hierarchical community summaries to answer global sensemaking queries via map-reduce, while RAG-Fusion generates multiple query rewrites at query time and fuses their vector search rankings using Reciprocal Rank Fusion (RRF)."
+  },
+  {
+    "id": "q_multi_03",
+    "category": "multi_hop_rag",
+    "question": "How do ReAct and Reflexion differ in how an LLM agent improves its decision-making across steps or trials?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2210.03629", "2303.11366"],
+    "evidence_quotes": [
+      "ReAct prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task in an interleaved manner",
+      "Reflexion converts binary or scalar feedback from the environment into verbal feedback in the form of a textual summary"
+    ],
+    "should_refuse": false,
+    "reference_answer": "ReAct interleaves verbal reasoning traces and environment actions within a single trajectory, whereas Reflexion adds cross-trial verbal reinforcement learning by converting task feedback into textual reflections stored in an episodic memory buffer for subsequent episodes."
+  },
+  {
+    "id": "q_multi_04",
+    "category": "multi_hop_rag",
+    "question": "Compare how Toolformer and MemGPT use function/API calls to overcome intrinsic LLM limitations.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2302.04761", "2310.08560"],
+    "evidence_quotes": [
+      "We introduce Toolformer, a model trained to decide which APIs to call, when to call them, what arguments to pass",
+      "MemGPT uses functions to move data between main context and external context (the archival and recall storage databases)"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Toolformer fine-tunes an LM in a self-supervised way to invoke external APIs (calculator, QA, search, translation, calendar) to fix arithmetic and knowledge gaps, while MemGPT uses OS-inspired function calls to page information between main context and external archival/recall storage to overcome finite context windows."
+  },
+  {
+    "id": "q_multi_05",
+    "category": "multi_hop_rag",
+    "question": "Compare how QLoRA and DoRA improve upon standard LoRA fine-tuning.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.14314", "2402.09353"],
+    "evidence_quotes": [
+      "QLORA backpropagates gradients through a frozen, 4-bit quantized pretrained language model into Low Rank Adapters (LoRA)",
+      "DoRA decomposes the pre-trained weight into two components, magnitude and direction, for fine-tuning, specifically employing LoRA for directional updates"
+    ],
+    "should_refuse": false,
+    "reference_answer": "QLoRA focuses on memory efficiency by quantizing the frozen base model to 4-bit NormalFloat with Double Quantization and Paged Optimizers while backpropagating into LoRA adapters; DoRA focuses on closing the learning-capacity gap with full fine-tuning by decomposing weights into magnitude and direction and applying LoRA to directional updates."
+  },
+  {
+    "id": "q_multi_06",
+    "category": "multi_hop_rag",
+    "question": "Compare DPO and ORPO in terms of training stages and whether a reference model is required.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.18290", "2403.07691"],
+    "evidence_quotes": [
+      "where β is a parameter controlling the deviation from the base reference policy πref, namely the initial SFT model πSFT",
+      "our approach requires neither an SFT warm-up stage nor a reference model, enabling resource-efficient development"
+    ],
+    "should_refuse": false,
+    "reference_answer": "DPO removes the RL loop and explicit reward model from RLHF but still requires an initial SFT warm-up stage and a frozen reference policy πref. ORPO merges SFT and alignment into a single monolithic stage using a log odds ratio penalty, requiring neither a warm-up stage nor a reference model."
+  },
+  {
+    "id": "q_multi_07",
+    "category": "multi_hop_rag",
+    "question": "Compare how QLoRA and AWQ approach low-bit quantization of large language models.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.14314", "2306.00978"],
+    "evidence_quotes": [
+      "QLORA achieves high-fidelity 4-bit finetuning via two techniques we propose-4-bit NormalFloat (NF4) quantization and Double Quantization",
+      "AWQ finds that not all weights in an LLM are equally important. Protecting only 1% salient weights can greatly reduce quantization error"
+    ],
+    "should_refuse": false,
+    "reference_answer": "QLoRA targets memory-efficient 4-bit fine-tuning using NF4 quantile quantization and Double Quantization (dequantizing to BF16 during computation), whereas AWQ targets hardware-friendly post-training weight-only compression for fast on-device inference by scaling up the 1% salient weight channels identified from activation magnitudes."
+  },
+  {
+    "id": "q_multi_08",
+    "category": "multi_hop_rag",
+    "question": "Compare how RAGAS and FActScore measure factual faithfulness in LLM generations.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2309.15217", "2305.14251"],
+    "evidence_quotes": [
+      "To estimate faithfulness, we first use an LLM to extract a set of statements, S(as(q))",
+      "Computing FACTSCORE involves (1) breaking a generation into a series of atomic facts-short statements that each contain one piece of information"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Both decompose generated text into fine-grained claims/atomic facts and verify them against a source: RAGAS evaluates reference-free RAG pipelines by extracting statements from an answer and checking if they are inferred from the retrieved context c(q), while FActScore breaks long-form generations into atomic facts and computes the percentage supported by a reliable knowledge source."
+  },
+  {
+    "id": "q_multi_09",
+    "category": "multi_hop_rag",
+    "question": "What biases in LLM-as-a-judge evaluators are highlighted across the G-EVAL and MT-Bench papers?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2303.16634", "2306.05685"],
+    "evidence_quotes": [
+      "highlight the potential concern of LLM-based evaluators having a bias towards the LLM-generated texts",
+      "We examine the usage and limitations of LLM-as-a-judge, including position, verbosity, and self-enhancement biases, as well as limited reasoning ability"
+    ],
+    "should_refuse": false,
+    "reference_answer": "G-EVAL highlights that LLM evaluators exhibit bias favoring LLM-generated texts over human-written texts, while the MT-Bench paper systematically categorizes position bias, verbosity bias, self-enhancement bias, and limited reasoning ability."
+  },
+  {
+    "id": "q_multi_10",
+    "category": "multi_hop_rag",
+    "question": "How do HaluEval and FActScore evaluate hallucinations in ChatGPT, and what key findings do they report?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.11747", "2305.14251"],
+    "evidence_quotes": [
+      "ChatGPT is likely to generate hallucinated content related to specific topics by fabricating unverifiable information (i.e., about 19.5% responses)",
+      "commercially available LMs are riddled with errors, having FACTSCOREs of 42%, 58% and 71%, respectively"
+    ],
+    "should_refuse": false,
+    "reference_answer": "HaluEval uses 35,000 samples (human-annotated and sampling-then-filtering) and finds ChatGPT fabricates unverifiable information in ~19.5% of responses and only achieves 62.59% accuracy recognizing QA hallucinations; FActScore measures atomic fact precision on biographies and finds ChatGPT achieves only 58% FActScore (dropping from 80% to 16% on rare entities)."
+  },
+  {
+    "id": "q_multi_11",
+    "category": "multi_hop_rag",
+    "question": "Compare how AutoGen and ReAct structure agent-tool and human-in-the-loop interaction.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2308.08155", "2210.03629"],
+    "evidence_quotes": [
+      "AutoGen agents are customizable, conversable, and can operate in various modes that employ combinations of LLMs, human inputs, and tools",
+      "humans can also control or correct the agent behavior on the go by thought editing"
+    ],
+    "should_refuse": false,
+    "reference_answer": "ReAct focuses on a single-agent Thought-Action-Observation prompting loop where humans can inspect or edit reasoning traces on the go, whereas AutoGen generalizes to multi-agent conversations with customizable conversable agents (such as AssistantAgent and UserProxyAgent) supporting configurable human input and tool execution."
+  },
+  {
+    "id": "q_multi_12",
+    "category": "multi_hop_rag",
+    "question": "How does CRAG build directly on Self-RAG's experimental setup and improve its robustness?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2401.15884", "2310.11511"],
+    "evidence_quotes": [
+      "CRAG is plug-and-play and experimentally implemented into RAG (Lewis et al., 2020) and Self-RAG (Asai et al., 2024)",
+      "SELF-RAG dynamically decides when to retrieve text passages by predicting Retrieve"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Self-RAG adaptively decides when to retrieve via reflection tokens using Contriever passages, while CRAG plugs into Self-RAG using the same Contriever retrieval results and adds a 0.77B T5-large retrieval evaluator, decompose-then-recompose strip refinement, and web search fallback when retrieval is incorrect."
+  },
+  {
+    "id": "q_multi_13",
+    "category": "multi_hop_rag",
+    "question": "Compare how MemGPT and Reflexion use memory mechanisms to improve LLM agent performance.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2310.08560", "2303.11366"],
+    "evidence_quotes": [
+      "MemGPT's OS-inspired multi-level memory architecture delineates between two primary memory types: main context",
+      "maintain their own reflective text in an episodic memory buffer to induce better decision-making in subsequent trials"
+    ],
+    "should_refuse": false,
+    "reference_answer": "MemGPT implements an OS-inspired hierarchical memory (main context vs. external recall/archival storage) managed via paging function calls to handle unbounded context, while Reflexion stores natural-language self-reflections from prior failures in an episodic memory buffer to guide future trials."
+  },
+  {
+    "id": "q_multi_14",
+    "category": "multi_hop_rag",
+    "question": "How do MT-Bench and RAGAS motivate moving beyond traditional NLP metrics or closed-ended benchmarks?",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2306.05685", "2309.15217"],
+    "evidence_quotes": [
+      "benchmarks like MMLU [19] and HELM [24] cannot effectively tell the difference between these aligned models and the base models",
+      "RAG systems are often evaluated in terms of the language modelling task itself, i.e. by measuring perplexity on some reference corpus"
+    ],
+    "should_refuse": false,
+    "reference_answer": "MT-Bench argues that closed-ended benchmarks like MMLU and HELM fail to capture human preferences in open-ended multi-turn conversations, while RAGAS argues that perplexity and short extractive QA fail to capture retrieval relevance and faithfulness without ground-truth references."
+  },
+  {
+    "id": "q_multi_15",
+    "category": "multi_hop_rag",
+    "question": "Compare the parameter efficiency and inference latency goals of DoRA and AWQ.",
+    "expected_tool_calls": ["search_paper_chunks"],
+    "expected_arxiv_ids": ["2402.09353", "2306.00978"],
+    "evidence_quotes": [
+      "By employing DoRA, we enhance both the learning capacity and training stability of LoRA while avoiding any additional inference overhead",
+      "TinyChat offers more than 3× speedup over the Huggingface FP16 implementation on both desktop and mobile GPUs"
+    ],
+    "should_refuse": false,
+    "reference_answer": "DoRA keeps inference overhead at zero compared to the base model by merging magnitude and low-rank directional updates back into the weights after fine-tuning, whereas AWQ actively accelerates inference (over 3x speedup over FP16 via TinyChat) by compressing weights to 4-bit with activation-aware channel scaling."
+  },
+  {
+    "id": "q_sql_01",
+    "category": "mcp_sql",
+    "question": "How many papers are indexed in total in our database, and how are they distributed across topic clusters?",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "There are 60 papers in total, evenly distributed with 15 papers in each of the four topic clusters: agents, evaluation, finetuning, and rag."
+  },
+  {
+    "id": "q_sql_02",
+    "category": "mcp_sql",
+    "question": "Which model and paper report the highest score on the PopQA benchmark in our database?",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": ["2401.15884"],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "CRAG + Self-RAG 7B from paper arXiv:2401.15884 reports the highest PopQA Accuracy score of 59.8."
+  },
+  {
+    "id": "q_sql_03",
+    "category": "mcp_sql",
+    "question": "List all models and scores reported on the MMLU benchmark in our database, ordered from highest to lowest.",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": ["2305.14314"],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "The MMLU scores in the database include Guanaco 65B (QLoRA) with 62.7 Accuracy and Guanaco 33B (QLoRA) with 57.8 Accuracy from arXiv:2305.14314."
+  },
+  {
+    "id": "q_sql_04",
+    "category": "mcp_sql",
+    "question": "How many distinct authors are stored in the authors table of papers.db?",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "There are 337 distinct authors stored in the authors table."
+  },
+  {
+    "id": "q_sql_05",
+    "category": "mcp_sql",
+    "question": "Count how many papers in the database were published in each year.",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "The SQL query groups the 60 papers by publication year from 2022 through 2026."
+  },
+  {
+    "id": "q_sql_06",
+    "category": "mcp_sql",
+    "question": "Which paper in our database reports a score on the HumanEval benchmark and what is that score?",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": ["2303.11366"],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "Paper arXiv:2303.11366 (Reflexion) reports a HumanEval Pass@1 score of 91.0 for Reflexion + GPT-4."
+  },
+  {
+    "id": "q_sql_07",
+    "category": "mcp_sql",
+    "question": "Which paper in the database has the largest page_count?",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": ["2601.05264"],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "Paper arXiv:2601.05264 has the largest page count in the database."
+  },
+  {
+    "id": "q_sql_08",
+    "category": "mcp_sql",
+    "question": "List all papers authored by Shunyu Yao in our database.",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": ["2210.03629", "2303.11366"],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "Shunyu Yao is an author on arXiv:2210.03629 (ReAct) and arXiv:2303.11366 (Reflexion)."
+  },
+  {
+    "id": "q_sql_09",
+    "category": "mcp_sql",
+    "question": "What score is recorded on the MT-Bench benchmark in our database and which paper reported it?",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": ["2306.05685"],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "GPT-4 has a recorded MT-Bench score of 8.99 from arXiv:2306.05685 (Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena)."
+  },
+  {
+    "id": "q_sql_10",
+    "category": "mcp_sql",
+    "question": "List all distinct benchmark names currently recorded in the benchmarks_reported table.",
+    "expected_tool_calls": ["query_papers_db"],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": false,
+    "reference_answer": "The benchmarks_reported table records benchmarks including PopQA, TriviaQA, QuALITY, HotpotQA, HumanEval, MMLU, Commonsense, MT-Bench, and HaluEval."
+  },
+  {
+    "id": "q_hybrid_01",
+    "category": "hybrid",
+    "question": "Which paper in our database achieves the highest PopQA score, and what three actions does its retrieval evaluator trigger?",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2401.15884"],
+    "evidence_quotes": [
+      "A confidence degree is quantified based on which different knowledge retrieval actions of {Correct, Incorrect, Ambiguous} can be triggered"
+    ],
+    "should_refuse": false,
+    "reference_answer": "CRAG (arXiv:2401.15884) achieves the highest PopQA score (59.8 for CRAG + Self-RAG 7B). Its retrieval evaluator triggers three actions: Correct, Incorrect, and Ambiguous."
+  },
+  {
+    "id": "q_hybrid_02",
+    "category": "hybrid",
+    "question": "Find the paper with the highest HumanEval score in the database and explain how it learns from failures without updating weights.",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2303.11366"],
+    "evidence_quotes": [
+      "Reflexion agents verbally reflect on task feedback signals, then maintain their own reflective text in an episodic memory buffer"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Reflexion (arXiv:2303.11366) achieves 91.0 Pass@1 on HumanEval. It reinforces agents without updating weights by converting feedback into verbal reflections stored in an episodic memory buffer."
+  },
+  {
+    "id": "q_hybrid_03",
+    "category": "hybrid",
+    "question": "Which paper reports the highest MMLU score in our database, and what are its three core memory-saving innovations?",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.14314"],
+    "evidence_quotes": [
+      "QLORA introduces multiple innovations designed to reduce memory use without sacrificing performance: (1) 4-bit NormalFloat"
+    ],
+    "should_refuse": false,
+    "reference_answer": "QLoRA (arXiv:2305.14314) reports the highest MMLU score (62.7 for Guanaco 65B). Its three memory-saving innovations are 4-bit NormalFloat (NF4), Double Quantization, and Paged Optimizers."
+  },
+  {
+    "id": "q_hybrid_04",
+    "category": "hybrid",
+    "question": "Identify the paper reporting the HotpotQA EM score in our database and describe the Wikipedia API actions it uses.",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2210.03629"],
+    "evidence_quotes": [
+      "We design a simple Wikipedia web API with three types of actions to support interactive information retrieval: (1) search[entity]"
+    ],
+    "should_refuse": false,
+    "reference_answer": "ReAct (arXiv:2210.03629) reports 27.4 EM on HotpotQA for PaLM-540B. It uses three Wikipedia API actions: search[entity], lookup[string], and finish[answer]."
+  },
+  {
+    "id": "q_hybrid_05",
+    "category": "hybrid",
+    "question": "Which paper reports a score on MT-Bench in our database, and what level of agreement does GPT-4 achieve with human preferences in that paper?",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2306.05685"],
+    "evidence_quotes": [
+      "GPT-4 judge match human evaluations at an agreement rate exceeding 80%, achieving the same level of human-human agreement"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Paper arXiv:2306.05685 reports GPT-4's MT-Bench score of 8.99 and shows that GPT-4 as a judge matches human evaluations at over 80% agreement, comparable to human-human agreement."
+  },
+  {
+    "id": "q_hybrid_06",
+    "category": "hybrid",
+    "question": "Find the paper reporting a Commonsense benchmark score in our database and explain how it decomposes pre-trained weights.",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2402.09353"],
+    "evidence_quotes": [
+      "DoRA decomposes the pre-trained weight into two components, magnitude and direction, for fine-tuning, specifically employing LoRA for directional updates"
+    ],
+    "should_refuse": false,
+    "reference_answer": "DoRA (arXiv:2402.09353) reports 78.1 Accuracy on Commonsense for LLaMA-7B. It decomposes pre-trained weights into magnitude and direction components and applies LoRA to the directional updates."
+  },
+  {
+    "id": "q_hybrid_07",
+    "category": "hybrid",
+    "question": "Which paper in the database reports on HaluEval, and what two-stage automatic framework does it use to generate hallucinated samples?",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2305.11747"],
+    "evidence_quotes": [
+      "To generate these samples automatically, we propose a two-stage framework, i.e., samplingthen-filtering"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Paper arXiv:2305.11747 (HaluEval) reports 62.59% QA hallucination detection accuracy for GPT-3.5 and introduces a two-stage sampling-then-filtering framework to generate hallucinated samples."
+  },
+  {
+    "id": "q_hybrid_08",
+    "category": "hybrid",
+    "question": "Among the 2023 RAG papers with a recorded TriviaQA score in our database, which paper is it and how does it control generation at inference time?",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2310.11511"],
+    "evidence_quotes": [
+      "Generating reflection tokens makes the LM controllable during the inference phase, enabling it to tailor its behavior to diverse task requirements"
+    ],
+    "should_refuse": false,
+    "reference_answer": "Self-RAG (arXiv:2310.11511) reports 69.3 Accuracy on TriviaQA (13B) and controls inference via reflection tokens and segment-level beam search weighted by critique token probabilities."
+  },
+  {
+    "id": "q_hybrid_09",
+    "category": "hybrid",
+    "question": "How many papers are in the 'agents' cluster in our database, and how does MemGPT manage context beyond a fixed window?",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2310.08560"],
+    "evidence_quotes": [
+      "we propose virtual context management, a technique drawing inspiration from hierarchical memory systems in traditional operating systems"
+    ],
+    "should_refuse": false,
+    "reference_answer": "There are 15 papers in the 'agents' cluster. MemGPT (arXiv:2310.08560) uses OS-inspired virtual context management to page data between main context and external storage via function calls."
+  },
+  {
+    "id": "q_hybrid_10",
+    "category": "hybrid",
+    "question": "How many papers are in the 'evaluation' cluster in our database, and what three quality aspects does RAGAS measure?",
+    "expected_tool_calls": ["query_papers_db", "search_paper_chunks"],
+    "expected_arxiv_ids": ["2309.15217"],
+    "evidence_quotes": [
+      "First, Faithfulness refers to the idea that the answer should be grounded in the given context"
+    ],
+    "should_refuse": false,
+    "reference_answer": "There are 15 papers in the 'evaluation' cluster. RAGAS (arXiv:2309.15217) measures Faithfulness, Answer Relevance, and Context Relevance without ground-truth references."
+  },
+  {
+    "id": "q_ood_01",
+    "category": "out_of_domain",
+    "question": "What was the exact closing stock price of NVIDIA on November 1, 2026?",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot answer this question because the corpus only contains AI research papers from arXiv and does not include financial or stock market data."
+  },
+  {
+    "id": "q_ood_02",
+    "category": "out_of_domain",
+    "question": "What is the weather forecast for Hanoi tomorrow?",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot provide weather forecasts because I only have access to the indexed AI research papers corpus."
+  },
+  {
+    "id": "q_ood_03",
+    "category": "out_of_domain",
+    "question": "Give me a traditional recipe for cooking Vietnamese Pho Bo.",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot provide cooking recipes because this assistant is restricted to the indexed arXiv AI research paper corpus."
+  },
+  {
+    "id": "q_ood_04",
+    "category": "out_of_domain",
+    "question": "Who won the UEFA Champions League final in 2026?",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot answer sports questions because the indexed corpus only covers AI research papers from arXiv."
+  },
+  {
+    "id": "q_ood_05",
+    "category": "out_of_domain",
+    "question": "Summarize the methodology of arXiv:9999.99999 on Quantum Teleportation in Mars Colonies.",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I could not find arXiv:9999.99999 in the indexed AI paper corpus and cannot summarize a paper that is not in the database."
+  },
+  {
+    "id": "q_ood_06",
+    "category": "out_of_domain",
+    "question": "What is the current exchange rate between USD and VND today?",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot provide live currency exchange rates because I only have access to the indexed AI research paper corpus."
+  },
+  {
+    "id": "q_ood_07",
+    "category": "out_of_domain",
+    "question": "Which flights from Ho Chi Minh City to Tokyo are cheapest next Friday?",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot search flight prices because this system only answers questions grounded in the indexed arXiv AI research papers."
+  },
+  {
+    "id": "q_ood_08",
+    "category": "out_of_domain",
+    "question": "Diagnose my persistent headache and prescribe the right dosage of ibuprofen.",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot provide medical diagnoses or prescriptions; this assistant only answers questions based on the indexed AI research papers."
+  },
+  {
+    "id": "q_ood_09",
+    "category": "out_of_domain",
+    "question": "What is the GDP growth rate of Japan in Q3 2026?",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot answer macroeconomic questions because the indexed corpus only contains AI research papers from arXiv."
+  },
+  {
+    "id": "q_ood_10",
+    "category": "out_of_domain",
+    "question": "Write a legal contract for leasing a commercial apartment in Singapore.",
+    "expected_tool_calls": [],
+    "expected_arxiv_ids": [],
+    "evidence_quotes": [],
+    "should_refuse": true,
+    "reference_answer": "I cannot draft legal contracts because this assistant is strictly scoped to the indexed AI research paper corpus."
+  }
+]
