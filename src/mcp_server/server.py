@@ -23,6 +23,7 @@ mcp = FastMCP(
     "ai-papers-mcp",
     host=settings.mcp.host,
     port=settings.mcp.port,
+    stateless_http=True,
 )
 
 VALID_PRIORITIES = {"low", "medium", "high"}

@@ -1,0 +1,41 @@
+# Optional Cloud / Linux VM deployment (NOT required on Windows Laptop — use scripts/start_local.py)
+services:
+  mcp:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.api
+    command: ["uv", "run", "python", "-m", "src.mcp_server.server"]
+    env_file: ../.env
+    environment:
+      MCP_TRANSPORT: streamable-http
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    ports:
+      - "8001:8001"
+
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.api
+    env_file: ../.env
+    environment:
+      MCP_SERVER_URL: http://mcp:8001/mcp
+    depends_on:
+      - mcp
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    ports:
+      - "8000:8000"
+
+  ui:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.ui
+    environment:
+      API_BASE_URL: http://api:8000
+    depends_on:
+      - api
+    ports:
+      - "8501:8501"

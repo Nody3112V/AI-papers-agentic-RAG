@@ -47,6 +47,7 @@ def _build_single_model(provider: str, tier: Literal["fast", "main"]) -> BaseCha
             google_api_key=env.gemini_api_key,
             temperature=temp,
             max_retries=1,
+            timeout=30.0,
         )
 
     if provider == "groq":
@@ -60,6 +61,7 @@ def _build_single_model(provider: str, tier: Literal["fast", "main"]) -> BaseCha
             groq_api_key=env.groq_api_key,
             temperature=temp,
             max_retries=1,
+            timeout=30.0,
         )
 
     if provider == "openai_compatible":
